@@ -1,0 +1,61 @@
+	export OS_USERNAME=admin
+	export OS_PASSWORD=ADMIN_PASS
+	export OS_PROJECT_NAME=admin
+	export OS_USER_DOMAIN_NAME=Default
+	export OS_PROJECT_DOMAIN_NAME=Default
+	export OS_AUTH_URL=http://192.168.142.136:35357/v3/
+	export OS_IDENTITY_API_VERSION=3
+
+
+	keystone-manage bootstrap --bootstrap-password ADMIN_PASS --bootstrap-admin-url http://192.168.142.136:35357/v3/ --bootstrap-internal-url http://192.168.142.136:5000/v3/ --bootstrap-public-url http://192.168.142.136:5000/v3/ --bootstrap-region-id RegionOne
+
+
+	 1、openstack user create --domain default --password-prompt swift  账号密码swift:swift  admin:admin
+	 2、openstack service create --name swift description "OpenStack Object Storage" object-store
+
+	 3、openstack endpoint create --region RegionOne object-store public http://controller:8080/v1/AUTH_%\(project_id\)s
+
+	 4、openstack endpoint create --region RegionOne object-store internal http://controller:8080/v1/AUTH_%\(project_id\)s
+
+	 5、openstack endpoint create --region RegionOne object-store admin http://controller:8080/v1
+
+	 6、yum install swift swift-proxy python-swiftclient python-keystoneclient python-keystonemiddleware memcached
+
+	 create ring
+
+	 account:
+	 	1、swift-ring-builder account.builder create 10 3 1
+	 	2、swift-ring-builder account.builder
+	 	3、
+	 		swift-ring-builder account.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdb --weight 100
+			swift-ring-builder account.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdc --weight 100
+			swift-ring-builder account.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdd --weight 100
+			swift-ring-builder account.builder add --region 1 --zone 2 --ip 192.168.142.136 --port 6202 --device sdc --weight 100
+		4、swift-ring-builder account.builder
+		5、swift-ring-builder account.builder rebalance
+	 container
+	 	1、swift-ring-builder container.builder create 10 3 1
+	 	2、swift-ring-builder container.builder
+	 	3、
+	 		swift-ring-builder container.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdb --weight 100
+			swift-ring-builder container.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdc --weight 100
+			swift-ring-builder container.builder add --region 1 --zone 2 --ip 192.168.142.136 --port 6202 --device sdb --weight 100
+			swift-ring-builder container.builder add --region 1 --zone 2 --ip 192.168.142.136 --port 6202 --device sdc --weight 100
+		4、swift-ring-builder container.builder
+		5、swift-ring-builder container.builder rebalance
+
+	object
+
+	 	1、swift-ring-builder object.builder create 10 3 1
+	 	2、swift-ring-builder object.builder
+	 	3、
+	 		swift-ring-builder object.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdb --weight 100
+			swift-ring-builder object.builder add --region 1 --zone 1 --ip 192.168.142.136 --port 6202 --device sdc --weight 100
+			swift-ring-builder object.builder add --region 1 --zone 2 --ip 192.168.142.136 --port 6202 --device sdb --weight 100
+			swift-ring-builder object.builder add --region 1 --zone 2 --ip 192.168.142.136 --port 6202 --device sdc --weight 100
+		4、swift-ring-builder object.builder
+		5、swift-ring-builder object.builder rebalance
+
+	 		
+
+  
