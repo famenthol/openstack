@@ -188,6 +188,10 @@ def validate_hash_conf():
     global HASH_PATH_PREFIX
     if not HASH_PATH_SUFFIX and not HASH_PATH_PREFIX:
         hash_conf = ConfigParser()
+        #SWIFT_CONF_FILE  /etc/swift/swift.conf
+        #[swift-hash]
+        #swift_hash_path_suffix = <string random>
+
         if hash_conf.read(SWIFT_CONF_FILE):
             try:
                 HASH_PATH_SUFFIX = hash_conf.get('swift-hash',
@@ -428,7 +432,7 @@ def config_read_prefixed_options(conf, prefix_name, defaults):
 def noop_libc_function(*args):
     return 0
 
-
+###校验/etc/swift/swift.conf 配置
 def validate_configuration():
     try:
         validate_hash_conf()
@@ -2066,7 +2070,7 @@ def expand_ipv6(address):
     packed_ip = socket.inet_pton(socket.AF_INET6, address)
     return socket.inet_ntop(socket.AF_INET6, packed_ip)
 
-
+####获取网卡信息
 def whataremyips(bind_ip=None):
     """
     Get "our" IP addresses ("us" being the set of services configured by

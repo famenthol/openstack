@@ -191,7 +191,7 @@ class Replicator(Daemon):
                                    self.recon_replicator)
         self.extract_device_re = re.compile('%s%s([^%s]+)' % (
             self.root, os.path.sep, os.path.sep))
-
+    ##初始化self.stats
     def _zero_stats(self):
         """Zero out the stats."""
         self.stats = {'attempted': 0, 'success': 0, 'failure': 0, 'ts_repl': 0,
@@ -629,6 +629,7 @@ class Replicator(Daemon):
             return
         self._local_device_ids = set()
         found_local = False
+        ###遍历节点
         for node in self.ring.devs:
             if node and is_local_device(ips, self.port,
                                         node['replication_ip'],
@@ -661,7 +662,10 @@ class Replicator(Daemon):
         self.cpool.waitall()
         self.logger.info(_('Replication run OVER'))
         self._report_stats()
-
+    ## while true   self.run_onec  
+    #执行时间小于配置的interval时，sleep
+    #
+    #
     def run_forever(self, *args, **kwargs):
         """
         Replicate dbs under the given root in an infinite loop.
