@@ -1,0 +1,5 @@
+仅仅下载rpm包到指定目录
+yum install yum-plugin-downloadonly
+
+yum install --downloadonly --downloaddir=/opt/orca
+downloaddir为保存的rpm文件路径，默认路径为/var/cache/yum/x86_64/7/base/packages/
