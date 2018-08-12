@@ -1,5 +1,18 @@
-仅仅下载rpm包到指定目录
+一、仅仅下载rpm包到指定目录
 yum install yum-plugin-downloadonly
 
 yum install --downloadonly --downloaddir=/opt/orca
 downloaddir为保存的rpm文件路径，默认路径为/var/cache/yum/x86_64/7/base/packages/
+
+
+二、制作yum源：local
+
+1、yum install createrepo
+2、create -v localsource
+3、配置repo文件 /etc/yum.repo.d
+   创建文件：
+   [localsource]
+   name=self       #源名称
+   baseurl=file:///path  
+   enabled=1  #这个选项表示这个repo中定义的源是启用的，0为禁用
+   gpgcheck=0 #是否检查GPG(GNU Private Guard)，一种密钥方式签名
