@@ -1,0 +1,20 @@
+CPM 应用部署
+
+实习期间学习angularJS1.x与tinyui，熟悉前台的MVC模式的实现方式，主要工作为修改bug和定义前后台交互的数据格式定义
+
+
+参与系统的技术调研，Jenkins与StackStorm，基础框架的搭建，熟悉openstack组件keystone与swift，通过shell脚本一键部署keystone和swift，activity的工作流程，flyway数据库版本管理，elk日志管理，dockers以及docker集群。SrpingCloud微服务，mybatis框架,熟悉linux操作系统
+
+
+CPM 应用部署
+  应用部署实现对hicloud云平台的基础资源一键创建以及部署
+
+参与后台代码编写，微服务之间的调用，测试脚本， 后台接口的数据格式以及参数校验，对上传的文件进行校验，在测试请假期间负责应用部署的功能测试，集成对网络的一键化部署
+
+CloudOps平台
+   平台后台接口数据格式定义
+   资源管理和服务监控
+   工作流执行
+   集成activity工作流实现平台的工作流执行方式
+   负责mysql、elk、keystone、swift、redis以及系统服务的部署，实现mysql的主主部署方式，以及swift多节点部署，编写shell脚本的实现一键部署。系统内部数据的同步
+
